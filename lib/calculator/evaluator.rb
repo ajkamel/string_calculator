@@ -8,13 +8,13 @@ module Calculator
 
     def evaluate_string(string)
       return 'No String' if string.empty?
-      parsed_string = parse_string(string)
+      @parsed_string = parse_string(string)
 
-      if parsed_string.include?("+") || parsed_string.include?("-")
-        add_or_subtract(parsed_string)
+      if @parsed_string.include?("+") || @parsed_string.include?("-")
+        @parsed_string = add_or_subtract(@parsed_string)
       end
-      if parsed_string.include?("/") || parsed_string.include?("*")
-        multiply_or_divide(parsed_string)
+      if @parsed_string.include?("/") || @parsed_string.include?("*")
+        multiply_or_divide(@parsed_string)
       end
 
       return @result
@@ -43,9 +43,10 @@ module Calculator
         parsed[index + 1] = @result
         remove_space(parsed)
       end
+      parsed
     end
 
-    def multiply_or_divide
+    def multiply_or_divide(parsed)
       while parsed.include?("*") || parsed.include?("/")
         index = parsed.index("*") ? parsed.index("*") : parsed.index("/")
 
