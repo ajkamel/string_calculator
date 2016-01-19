@@ -28,18 +28,19 @@ module Calculator
 
     def add_or_subtract(parsed)
 
-      begin
+      while parsed.include?("+") || parsed.include?("-")
         index = parsed.index("+") ? parsed.index("+") : parsed.index("-")
 
         if parsed[index] == "+"
-          @result += parsed[index - 1].to_i + parsed[index + 1].to_i
+          @result = parsed[index - 1].to_f + parsed[index + 1].to_f
         else
-          @result += parsed[index - 1].to_i - parsed[index + 1].to_i
+          @result = parsed[index - 1].to_f - parsed[index + 1].to_f
         end
-        parsed[index], parsed[index - 1] = " "
+
+        parsed[index], parsed[index - 1] = " ", " "
         parsed[index + 1] = @result
         remove_space(parsed)
-      end until !parsed.include?("+") || !parsed.include?("-")
+      end
     end
 
     def multiply_or_divide
