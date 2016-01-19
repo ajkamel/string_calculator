@@ -19,4 +19,34 @@ describe Calculator::Evaluator do
     end
   end
 
+  context 'subtraction' do
+    it 'should subtract two integers' do
+      expect(@evaluator.evaluate_string('10 - 2')).to eq 8
+    end
+
+    it 'should subtract three integers' do
+      expect(@evaluator.evaluate_string('10 - 2 - 4')).to eq 4
+    end
+  end
+
+  context 'multiplication' do
+    it 'should multiply two integers' do
+      expect(@evaluator.evaluate_string('10 * 2')).to eq 20
+    end
+
+    it 'should multiply three integers' do
+      expect(@evaluator.evaluate_string('10 * 2 * 5')).to eq 100
+    end
+  end
+
+  context 'division' do
+    it 'should divide two integers' do
+      expect(@evaluator.evaluate_string('10 / 2')).to eq 5
+    end
+
+    it 'should divide two integers and a float' do
+      expect(@evaluator.evaluate_string('10.0 / 2 / 2')).to eq 2.5
+    end
+  end
+
 end

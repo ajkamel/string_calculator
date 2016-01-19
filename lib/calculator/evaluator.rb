@@ -1,6 +1,5 @@
 module Calculator
   class Evaluator
-    require 'pry'
 
     def initialize
       @delimiter = " "
@@ -13,6 +12,9 @@ module Calculator
 
       if parsed_string.include?("+") || parsed_string.include?("-")
         add_or_subtract(parsed_string)
+      end
+      if parsed_string.include?("/") || parsed_string.include?("*")
+        multiply_or_divide(parsed_string)
       end
 
       return @result
@@ -44,6 +46,19 @@ module Calculator
     end
 
     def multiply_or_divide
+      while parsed.include?("*") || parsed.include?("/")
+        index = parsed.index("*") ? parsed.index("*") : parsed.index("/")
+
+        if parsed[index] == "*"
+          @result = parsed[index - 1].to_f * parsed[index + 1].to_f
+        else
+          @result = parsed[index - 1].to_f / parsed[index + 1].to_f
+        end
+
+        parsed[index], parsed[index - 1] = " ", " "
+        parsed[index + 1] = @result
+        remove_space(parsed)
+      end
     end
 
   end
